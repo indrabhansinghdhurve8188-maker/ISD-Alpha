@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ISD Alpha — EPM Market Intelligence</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    background:#07101f;
+    color:#eef4ff;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+header{
+    background:#0d1729;
+    border-bottom:1px solid #263653;
+    padding:18px 5%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-size:27px;
+    font-weight:800;
+    letter-spacing:.5px;
+}
+
+.tagline{
+    color:#8e9db8;
+    font-size:12px;
+    margin-top:4px;
+}
+
+.status{
+    color:#43df8c;
+    font-size:12px;
+}
+
+main{
+    max-width:1200px;
+    margin:auto;
+    padding:20px 5%;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+    margin-bottom:12px;
+}
+
+.card{
+    background:#101a2e;
+    border:1px solid #263653;
+    border-radius:14px;
+    padding:16px;
+}
+
+label{
+    display:block;
+    color:#91a0bd;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.6px;
+    margin-bottom:8px;
+}
+
+input,
+select,
+button{
+    width:100%;
+    padding:12px;
+    border-radius:9px;
+    border:1px solid #30415f;
+    background:#091426;
+    color:white;
+    font-size:15px;
+}
+
+button{
+    background:#6878ff;
+    border:none;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+button:hover{
+    opacity:.9;
+}
+
+.big{
+    font-size:27px;
+    font-weight:800;
+}
+
+.bias{
+    font-size:27px;
+    font-weight:800;
+}
+
+.bullish{
+    color:#42df8b;
+}
+
+.bearish{
+    color:#ff6574;
+}
+
+.neutral{
+    color:#ffd166;
+}
+
+.range{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.range-box{
+    background:#0a1528;
+    border:1px solid #293957;
+    border-radius:10px;
+    padding:15px;
+}
+
+.score{
+    font-size:36px;
+    font-weight:800;
+}
+
+.bar{
+    width:100%;
+    height:12px;
+    background:#26344f;
+    border-radius:20px;
+    overflow:hidden;
+    margin-top:10px;
+}
+
+.fill{
+    height:100%;
+    width:50%;
+    background:#6878ff;
+    transition:.3s;
+}
+
+.reason{
+    color:#aab7cc;
+    font-size:13px;
+    line-height:1.7;
+    margin-top:12px;
+}
+
+.note{
+    color:#ffd166;
+    font-size:12px;
+    line-height:1.6;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:12px;
+}
+
+th,
+td{
+    padding:9px;
+    border-bottom:1px solid #24314b;
+    text-align:right;
+}
+
+th:first-child,
+td:first-child{
+    text-align:center;
+}
+
+th{
+    color:#91a0bd;
+}
+
+.ce{
+    color:#ff8792;
+}
+
+.pe{
+    color:#5fe09b;
+}
+
+.footer{
+    text-align:center;
+    color:#687793;
+    font-size:11px;
+    padding:25px 0;
+}
+
+@media(max-width:800px){
+
+    .grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+}
+
+@media(max-width:500px){
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .range{
+        grid-template-columns:1fr;
+    }
+
+    header{
+        padding:15px;
+    }
+
+    main{
+        padding:15px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div>
+
+<div class="logo">
+ISD Alpha
+</div>
+
+<div class="tagline">
+Original EPM & Option Chain Market Intelligence
+</div>
+
+</div>
+
+<div class="status">
+● SYSTEM READY
+</div>
+
+</header>
+
+
+<main>
+
+
+<!-- MARKET INPUTS -->
+
+<div class="grid">
+
+<div class="card">
+
+<label>Index</label>
+
+<select id="symbol">
+
+<option>NIFTY</option>
+
+<option>BANKNIFTY</option>
+
+</select>
+
+</div>
+
+
+<div class="card">
+
+<label>Spot Price</label>
+
+<input
+id="spot"
+type="number"
+value="24355"
+>
+
+</div>
+
+
+<div class="card">
+
+<label>ATM CE Premium</label>
+
+<input
+id="ce"
+type="number"
+value="105"
+>
+
+</div>
+
+
+<div class="card">
+
+<label>ATM PE Premium</label>
+
+<input
+id="pe"
+type="number"
+value="95"
+>
+
+</div>
+
+</div>
+
+
+<div class="grid">
+
+
+<div class="card">
+
+<label>IV %</label>
+
+<input
+id="iv"
+type="number"
+value="13"
+step="0.1"
+>
+
+</div>
+
+
+<div class="card">
+
+<label>Days To Expiry</label>
+
+<input
+id="days"
+type="number"
+value="1"
+step="0.1"
+>
+
+</div>
+
+
+<div class="card">
+
+<label>Put Call Ratio</label>
+
+<input
+id="pcr"
+type="number"
+value="1.08"
+step="0.01"
+>
+
+</div>
+
+
+<div class="card">
+
+<label>Futures Change %</label>
+
+<input
+id="future"
+type="number"
+value="0.20"
+step="0.01"
+>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<button onclick="runAnalysis()">
+
+RUN ISD ALPHA ANALYSIS
+
+</button>
+
+</div>
+
+
+<!-- MAIN RESULTS -->
+
+<div class="grid">
+
+
+<div class="card">
+
+<label>Expected Price Move</label>
+
+<div
+class="big"
+id="epm"
+>
+—
+</div>
+
+</div>
+
+
+<div class="card">
+
+<label>Expected Lower</label>
+
+<div
+class="big"
+id="lower"
+>
+—
+</div>
+
+</div>
+
+
+<div class="card">
+
+<label>Expected Upper</label>
+
+<div
+class="big"
+id="upper"
+>
+—
+</div>
+
+</div>
+
+
+<div class="card">
+
+<label>ATM Strike</label>
+
+<div
+class="big"
+id="atm"
+>
+—
+</div>
+
+</div>
+
+</div>
+
+
+<!-- BIAS -->
+
+<div class="grid">
+
+
+<div class="card">
+
+<label>Market Bias</label>
+
+<div
+class="bias neutral"
+id="bias"
+>
+NEUTRAL
+</div>
+
+</div>
+
+
+<div class="card">
+
+<label>ISD Score</label>
+
+<div
+class="score"
+id="score"
+>
+50/100
+</div>
+
+<div class="bar">
+
+<div
+class="fill"
+id="scoreFill"
+>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<label>ATM Premium Baseline</label>
+
+<div
+class="big"
+id="premium"
+>
+—
+</div>
+
+</div>
+
+
+<div class="card">
+
+<label>Model Status</label>
+
+<div
+class="big bullish"
+style="font-size:20px"
+>
+READY
+</div>
+
+</div>
+
+</div>
+
+
+<!-- RANGE -->
+
+<div class="card">
+
+<label>ISD Expected Market Range</label>
+
+<div class="range">
+
+
+<div class="range-box">
+
+<label>Lower Range</label>
+
+<div
+class="big"
+id="rangeLow"
+>
+—
+</div>
+
+</div>
+
+
+<div class="range-box">
+
+<label>Upper Range</label>
+
+<div
+class="big"
+id="rangeHigh"
+>
+—
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<!-- REASONS -->
+
+<div class="card">
+
+<label>Signal Factors</label>
+
+<div
+class="reason"
+id="reasons"
+>
+Run analysis to calculate the signal.
+</div>
+
+</div>
+
+
+<!-- EPM DETAILS -->
+
+<div class="card">
+
+<label>EPM Model Breakdown</label>
+
+<div
+class="reason"
+id="breakdown"
+>
+Waiting for analysis...
+</div>
+
+</div>
+
+
+<!-- OPTION CHAIN -->
+
+<div class="card">
+
+<label>Option Chain Structure</label>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Strike</th>
+
+<th>CE OI</th>
+
+<th>CE ΔOI</th>
+
+<th>CE IV</th>
+
+<th>PE IV</th>
+
+<th>PE ΔOI</th>
+
+<th>PE OI</th>
+
+</tr>
+
+</thead>
+
+<tbody id="chain">
+
+</tbody>
+
+</table>
+
+</div>
+
+
+<!-- WARNING -->
+
+<div class="card">
+
+<label>Important</label>
+
+<div class="note">
+
+ISD Alpha is an independent market-analysis prototype.
+The EPM range and directional score are statistical tools,
+not guaranteed predictions.
+
+Live exchange data, historical validation and backtesting
+must be connected before using the system for real trading.
+
+</div>
+
+</div>
+
+
+<div class="footer">
+
+ISD Alpha © 2026 — Original Market Intelligence Platform
+
+</div>
+
+
+</main>
+
+
+<script>
+
+
+function getNumber(id){
+
+    return Number(
+        document.getElementById(id).value
+    );
+
+}
+
+
+function formatNumber(value){
+
+    return Number(value).toLocaleString(
+        "en-IN",
+        {
+            maximumFractionDigits:2
+        }
+    );
+
+}
+
+
+function runAnalysis(){
+
+    const spot =
+        getNumber("spot");
+
+    const ce =
+        getNumber("ce");
+
+    const pe =
+        getNumber("pe");
+
+    const iv =
+        getNumber("iv");
+
+    const days =
+        getNumber("days");
+
+    const pcr =
+        getNumber("pcr");
+
+    const future =
+        getNumber("future");
+
+
+    if(!spot || !ce || !pe){
+
+        alert(
+            "Please enter Spot, CE and PE values."
+        );
+
+        return;
+
+    }
+
+
+    /*
+    ==================================================
+    ISD ALPHA — ORIGINAL EPM PROTOTYPE
+    ==================================================
+
+    Premium baseline
+    = average ATM CE + ATM PE
+
+    IV adjustment
+    = IV normalized around 13%
+
+    Time adjustment
+    = square-root of time
+
+    This is an original transparent prototype.
+    It is NOT copied from another platform.
+    */
+
+
+    const premium =
+        (ce + pe) / 2;
+
+
+    let ivFactor =
+        iv / 13;
+
+
+    if(ivFactor < 0.75){
+
+        ivFactor = 0.75;
+
+    }
+
+
+    if(ivFactor > 1.35){
+
+        ivFactor = 1.35;
+
+    }
+
+
+    const timeFactor =
+        Math.sqrt(
+            Math.max(days,0.1)
+        );
+
+
+    let epm =
+        premium *
+        ivFactor *
+        timeFactor;
+
+
+    if(epm < 40){
+
+        epm = 40;
+
+    }
+
+
+    const lower =
+        spot - epm;
+
+
+    const upper =
+        spot + epm;
+
+
+    const strikeStep = 50;
+
+
+    const atm =
+        Math.round(
+            spot / strikeStep
+        ) * strikeStep;
+
+
+    /*
+    ==============================================
+    ISD DIRECTION SCORE
+    ==============================================
+    */
+
+    let score = 50;
+
+    let reasons = [];
+
+
+    if(pcr > 1.10){
+
+        score += 10;
+
+        reasons.push(
+            "PCR > 1.10 → bullish contribution"
+        );
+
+    }
+
+    else if(pcr < 0.90){
+
+        score -= 10;
+
+        reasons.push(
+            "PCR < 0.90 → bearish contribution"
+        );
+
+    }
+
+    else{
+
+        reasons.push(
+            "PCR in neutral zone"
+        );
+
+    }
+
+
+    if(pe > ce){
+
+        score += 7;
+
+        reasons.push(
+            "ATM PE premium stronger"
+        );
+
+    }
+
+    else if(ce > pe){
+
+        score -= 7;
+
+        reasons.push(
+            "ATM CE premium stronger"
+        );
+
+    }
+
+
+    if(iv < 12){
+
+        score += 3;
+
+        reasons.push(
+            "Relatively low IV"
+        );
+
+    }
+
+    else if(iv > 18){
+
+        score -= 3;
+
+        reasons.push(
+            "Relatively high IV"
+        );
+
+    }
+
+
+    if(future > 0.20){
+
+        score += 8;
+
+        reasons.push(
+            "Futures positive"
+        );
+
+    }
+
+    else if(future < -0.20){
+
+        score -= 8;
+
+        reasons.push(
+            "Futures negative"
+        );
+
+    }
+
+
+    score =
+        Math.max(
+            0,
+            Math.min(
+                100,
+                Math.round(score)
+            )
+        );
+
+
+    let bias;
+
+
+    if(score >= 60){
+
+        bias = "BULLISH";
+
+    }
+
+    else if(score <= 40){
+
+        bias = "BEARISH";
+
+    }
+
+    else{
+
+        bias = "NEUTRAL";
+
+    }
+
+
+    /*
+    ==============================================
+    DISPLAY
+    ==============================================
+    */
+
+
+    document.getElementById("epm")
+        .innerHTML =
+        "± " +
+        formatNumber(epm);
+
+
+    document.getElementById("lower")
+        .innerHTML =
+        formatNumber(lower);
+
+
+    document.getElementById("upper")
+        .innerHTML =
+        formatNumber(upper);
+
+
+    document.getElementById("rangeLow")
+        .innerHTML =
+        formatNumber(lower);
+
+
+    document.getElementById("rangeHigh")
+        .innerHTML =
+        formatNumber(upper);
+
+
+    document.getElementById("atm")
+        .innerHTML =
+        formatNumber(atm);
+
+
+    document.getElementById("premium")
+        .innerHTML =
+        formatNumber(premium);
+
+
+    document.getElementById("score")
+        .innerHTML =
+        score +
+        "/100";
+
+
+    document.getElementById("scoreFill")
+        .style.width =
+        score +
+        "%";
+
+
+    const biasElement =
+        document.getElementById("bias");
+
+
+    biasElement.innerHTML =
+        bias;
+
+
+    biasElement.className =
+        "bias";
+
+
+    if(bias === "BULLISH"){
+
+        biasElement.classList.add(
+            "bullish"
+        );
+
+    }
+
+    else if(bias === "BEARISH"){
+
+        biasElement.classList.add(
+            "bearish"
+        );
+
+    }
+
+    else{
+
+        biasElement.classList.add(
+            "neutral"
+        );
+
+    }
+
+
+    document.getElementById("reasons")
+        .innerHTML =
+        reasons.join(" • ");
+
+
+    document.getElementById("breakdown")
+        .innerHTML =
+
+        "Premium Baseline: <b>" +
+        formatNumber(premium) +
+        "</b><br><br>" +
+
+        "IV Factor: <b>" +
+        ivFactor.toFixed(2) +
+        "</b><br><br>" +
+
+        "Time Factor: <b>" +
+        timeFactor.toFixed(2) +
+        "</b><br><br>" +
+
+        "Raw Expected Move: <b>" +
+        formatNumber(epm) +
+        "</b>";
+
+
+    /*
+    ==============================================
+    DEMO OPTION CHAIN MAP
+    ==============================================
+    */
+
+    let html = "";
+
+
+    for(
+        let strike = atm - 250;
+        strike <= atm + 250;
+        strike += 50
+    ){
+
+        const distance =
+            strike - spot;
+
+
+        const strength =
+            Math.max(
+                0,
+                1 -
+                Math.abs(distance) /
+                (epm * 1.5)
+            );
+
+
+        const ceOI =
+            Math.round(
+                10000 +
+                Math.max(
+                    0,
+                    distance
+                ) * 50 +
+                strength * 3000
+            );
+
+
+        const peOI =
+            Math.round(
+                10000 +
+                Math.max(
+                    0,
+                    -distance
+                ) * 50 +
+                strength * 3000
+            );
+
+
+        const ceChange =
+            distance > 0
+            ?
+            Math.round(
+                500 +
+                strength * 700
+            )
+            :
+            -200;
+
+
+        const peChange =
+            distance < 0
+            ?
+            Math.round(
+                500 +
+                strength * 700
+            )
+            :
+            -200;
+
+
+        html += `
+
+        <tr>
+
+        <td>
+        <b>${formatNumber(strike)}</b>
+        </td>
+
+        <td class="ce">
+        ${ceOI.toLocaleString()}
+        </td>
+
+        <td class="ce">
+        ${ceChange > 0 ? "+" : ""}
+        ${ceChange}
+        </td>
+
+        <td class="ce">
+        ${(iv + Math.abs(distance)/100).toFixed(1)}
+        </td>
+
+        <td class="pe">
+        ${(iv + Math.abs(distance)/100).toFixed(1)}
+        </td>
+
+        <td class="pe">
+        ${peChange > 0 ? "+" : ""}
+        ${peChange}
+        </td>
+
+        <td class="pe">
+        ${peOI.toLocaleString()}
+        </td>
+
+        </tr>
+
+        `;
+
+    }
+
+
+    document.getElementById("chain")
+        .innerHTML =
+        html;
+
+}
+
+
+runAnalysis();
+
+</script>
+
+</body>
+</html>
